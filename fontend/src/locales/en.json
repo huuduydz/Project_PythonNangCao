@@ -1,0 +1,57 @@
+{
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "vietnamese": "Vietnamese"
+  },
+  "app": {
+    "title": "ExpenseSplitter"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password"
+  },
+  "groups": {
+    "title": "Groups",
+    "createGroup": "Create Group",
+    "joinGroup": "Join Group",
+    "members": "Members",
+    "expenses": "Expenses"
+  },
+  "expenses": {
+    "title": "Expenses",
+    "addExpense": "Add Expense",
+    "paidBy": "Paid by",
+    "amount": "Amount",
+    "description": "Description",
+    "category": "Category",
+    "splitEqually": "Split Equally",
+    "customSplit": "Custom Split"
+  },
+  "categories": {
+    "food": "Food & Drinks",
+    "accommodation": "Accommodation",
+    "transport": "Transport",
+    "shopping": "Shopping",
+    "entertainment": "Entertainment",
+    "utilities": "Utilities",
+    "other": "Other"
+  },
+  "transactions": {
+    "title": "Settlements",
+    "pending": "Pending",
+    "completed": "Completed",
+    "from": "From",
+    "to": "To",
+    "status": "Status"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalExpenses": "Total Expenses",
+    "youOwe": "You owe",
+    "youAreOwed": "You are owed",
+    "netBalance": "Net Balance"
+  }
+}

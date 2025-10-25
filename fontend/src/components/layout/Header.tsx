@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -6,7 +6,7 @@ const navigation = [
   { name: 'Dashboard', href: '/', current: true },
   { name: 'Groups', href: '/groups', current: false },
   { name: 'Expenses', href: '/expenses', current: false },
-  { name: 'Settlements', href: '/settlements', current: false },
+  { name: 'Settlements', href: '/settlements', current: false }
 ]
 
 function classNames(...classes: string[]) {
@@ -49,7 +49,7 @@ export default function Header() {
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
-                        {item.name}
+                          {item.name}
                       </a>
                     ))}
                   </div>

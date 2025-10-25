@@ -1,0 +1,52 @@
+{
+  "common": {
+    "language": "Ngôn ngữ",
+    "english": "Tiếng Anh",
+    "vietnamese": "Tiếng Việt"
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "signup": "Đăng ký",
+    "email": "Email",
+    "password": "Mật khẩu"
+  },
+  "groups": {
+    "title": "Nhóm",
+    "createGroup": "Tạo nhóm",
+    "joinGroup": "Tham gia nhóm",
+    "members": "Thành viên",
+    "expenses": "Chi tiêu"
+  },
+  "expenses": {
+    "addExpense": "Thêm chi tiêu",
+    "paidBy": "Người trả",
+    "amount": "Số tiền",
+    "description": "Mô tả",
+    "category": "Danh mục",
+    "splitEqually": "Chia đều",
+    "customSplit": "Chia tùy chỉnh"
+  },
+  "categories": {
+    "food": "Ăn uống",
+    "accommodation": "Chỗ ở",
+    "transport": "Di chuyển",
+    "shopping": "Mua sắm",
+    "entertainment": "Giải trí",
+    "utilities": "Tiện ích",
+    "other": "Khác"
+  },
+  "transactions": {
+    "title": "Giao dịch",
+    "pending": "Đang chờ",
+    "completed": "Đã hoàn thành",
+    "from": "Từ",
+    "to": "Đến",
+    "status": "Trạng thái"
+  },
+  "dashboard": {
+    "totalExpenses": "Tổng chi tiêu",
+    "youOwe": "Bạn nợ",
+    "youAreOwed": "Nợ bạn",
+    "netBalance": "Số dư"
+  }
+}

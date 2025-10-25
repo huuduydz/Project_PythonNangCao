@@ -1,0 +1,192 @@
+/*
+  Mock data for the Expense Splitter frontend.
+  This file provides test data and helper functions for UI development.
+  When ready to replace with a real API, swap calls to these helper functions with network requests.
+*/
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+}
+
+export interface Group {
+  id: string;
+  name: string;
+  members: User[];
+  createdAt: string; // ISO date
+  currency: string;
+  notes?: string;
+}
+
+export interface SplitItem {
+  userId: string;
+  amount: number;
+}
+
+export type RecurringFrequency = 'weekly' | 'monthly' | 'yearly';
+
+export interface RecurringExpense {
+  frequency: RecurringFrequency;
+  nextDate: string;
+}
+
+export interface Expense {
+  id: string;
+  groupId: string;
+  paidBy: string;
+  amount: number;
+  currency: string;
+  description: string;
+  category: string;
+  date: string;
+  split: SplitItem[];
+  tags?: string[];
+  receiptImageUrl?: string;
+  ocrText?: string;
+  note?: string;
+  recurring?: RecurringExpense;
+}
+
+// Mock Users Data
+export const mockUsers: User[] = [
+  {
+    id: "u1",
+    name: "Nguyễn Văn A",
+    email: "nguyenvana@gmail.com",
+    avatar: "https://i.pravatar.cc/150?img=1"
+  },
+  {
+    id: "u2",
+    name: "Trần Thị B",
+    email: "tranthib@gmail.com",
+    avatar: "https://i.pravatar.cc/150?img=2"
+  },
+  {
+    id: "u3",
+    name: "Lê Văn C",
+    email: "levanc@gmail.com",
+    avatar: "https://i.pravatar.cc/150?img=3"
+  },
+  {
+    id: "u4",
+    name: "Phạm Thị D",
+    email: "phamthid@gmail.com",
+    avatar: "https://i.pravatar.cc/150?img=4"
+  }
+];
+
+// Mock Groups Data
+export const mockGroups: Group[] = [
+  {
+    id: "g1",
+    name: "Du lịch Đà Lạt",
+    members: [mockUsers[0], mockUsers[1], mockUsers[2]],
+    createdAt: "2025-10-20T00:00:00Z",
+    currency: "VND",
+    notes: "Chuyến đi Đà Lạt tháng 11/2025"
+  },
+  {
+    id: "g2", 
+    name: "Ăn trưa văn phòng",
+    members: [mockUsers[1], mockUsers[2], mockUsers[3]],
+    createdAt: "2025-10-15T00:00:00Z",
+    currency: "VND",
+    notes: "Chi phí ăn trưa cùng đồng nghiệp"
+  }
+];
+
+// Mock Expenses Data
+export const mockExpenses: Expense[] = [
+  {
+    id: "e1",
+    groupId: "g1",
+    paidBy: "u1",
+    amount: 1500000,
+    currency: "VND",
+    description: "Tiền khách sạn",
+    category: "Chỗ ở",
+    date: "2025-11-01T00:00:00Z",
+    split: [
+      { userId: "u1", amount: 500000 },
+      { userId: "u2", amount: 500000 },
+      { userId: "u3", amount: 500000 }
+    ]
+  },
+  {
+    id: "e2",
+    groupId: "g1",
+    paidBy: "u2",
+    amount: 900000,
+    currency: "VND",
+    description: "Tiền ăn uống",
+    category: "Ăn uống",
+    date: "2025-11-02T00:00:00Z",
+    split: [
+      { userId: "u1", amount: 300000 },
+      { userId: "u2", amount: 300000 },
+      { userId: "u3", amount: 300000 }
+    ]
+  },
+  {
+    id: "e3",
+    groupId: "g2",
+    paidBy: "u2",
+    amount: 150000,
+    currency: "VND",
+    description: "Cơm trưa 25/10",
+    category: "Ăn uống",
+    date: "2025-10-25T00:00:00Z",
+    split: [
+      { userId: "u1", amount: 50000 },
+      { userId: "u2", amount: 50000 },
+      { userId: "u3", amount: 50000 }
+    ],
+    recurring: {
+      frequency: 'weekly',
+      nextDate: '2025-11-01T00:00:00Z'
+    }
+  }
+];
+
+// Helper functions
+export const calculateGroupTotal = (groupId: string): number => {
+  return mockExpenses
+    .filter(expense => expense.groupId === groupId)
+    .reduce((total, expense) => total + expense.amount, 0);
+};
+
+export const calculateUserBalance = (userId: string): {
+  totalOwed: number;
+  totalOwes: number;
+} => {
+  let totalOwed = 0;
+  let totalOwes = 0;
+
+  mockExpenses.forEach(expense => {
+    // If user paid for the expense
+    if (expense.paidBy === userId) {
+      const userSplit = expense.split.find(split => split.userId === userId);
+      const userAmount = userSplit ? userSplit.amount : 0;
+      totalOwed += expense.amount - userAmount;
+    }
+    // If user needs to pay their split
+    const userSplit = expense.split.find(split => split.userId === userId);
+    if (userSplit && expense.paidBy !== userId) {
+      totalOwes += userSplit.amount;
+    }
+  });
+
+  return { totalOwed, totalOwes };
+};
+
+// Expense Categories
+export const expenseCategories = [
+  "Ăn uống",
+  "Chỗ ở",
+  "Di chuyển",
+  "Mua sắm",
+  "Giải trí",
+  "Khác"
+];
